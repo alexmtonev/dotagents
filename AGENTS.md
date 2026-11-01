@@ -9,7 +9,7 @@ Read `README.md` before changing a script or the layout; it is the spec for what
 - **Overrides mirror upstream.** `skills/<name>/` keeps the upstream folder's full structure (e.g. `agents/openai.yaml`), changing only what I've edited.
 - **`upstream/` is written by `scripts/skills.sh` alone.** It holds the last-seen upstream copy of each override; changes there arrive via a run, never a hand edit.
 - **One folder per harness.** `settings/dotclaude/` is Claude Code only; another harness (e.g. pi) gets a sibling folder and its own script called from `update.sh`.
-- **Third-party skills go through the CLI**: `npx skills add <source> --skill <name> -g`, without `-y`, which installs for every agent and creates folders such as `~/.kiro`.
+- **Third-party skills go through the CLI**: `npx skills add <owner/repo> -s <name> -a claude-code -g -y` and `npx skills remove <name> -g -y`. `-a claude-code` keeps other agents' folders (e.g. `~/.kiro`) from being created.
 
 ## Guardrails
 

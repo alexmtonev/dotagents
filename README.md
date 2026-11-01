@@ -52,13 +52,12 @@ Settings for one machine only go in `~/.claude/settings.local.json`, which this 
 `update.sh` only updates skills the CLI already has installed, so on a new machine, or for a new source, install them first:
 
 ```sh
-npx skills add mattpocock/skills -g           # pick skills interactively
-npx skills add mattpocock/skills --skill pr -g  # or name them
-npx skills remove <name> -g
-npx skills ls -g                                # what's installed
+npx skills add mattpocock/skills -s pr -a claude-code -g -y
+npx skills remove <name> -g -y
+npx skills ls -g                     # what's installed
 ```
 
-Avoid `-y` on `add`: it installs for every agent the CLI knows, creating folders such as `~/.kiro`.
+`-a claude-code` installs for Claude Code only; without it the CLI also creates folders for other agents, such as `~/.kiro`.
 
 ## `upstream/`
 
@@ -75,12 +74,12 @@ update.sh              runs everything below
 scripts/skills.sh      CLI update, then symlinks skills/*
 scripts/settings.sh    applies settings/dotclaude/*
 scripts/lib.sh         shared helpers (the ask prompt)
-skills/<name>/         my skills and overrides
+skills/<name>/         my skills and overrides (skills/dotagents tells agents how to use this repo)
 upstream/<name>/       last-seen third-party version of each override
 settings/dotclaude/    Claude Code files (other harnesses get their own folder)
 ```
 
 ## Known gaps
 
-- `npx skills update` can't be limited to Claude Code, so it may create other agents' folders (e.g. `~/.kiro`). Delete them if unwanted.
+- `npx skills update` has no `-a` option, so it may still create other agents' folders (e.g. `~/.kiro`). Delete them if unwanted.
 - Removing a folder from `skills/` leaves a dangling `~/.agents/skills/<name>` link; delete it by hand (and `npx skills add` the upstream skill again if it was an override).
