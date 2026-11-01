@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.p12)",
+      "Read(**/*.pfx)",
+      "Read(**/*.cert)",
+      "Read(**/*.crt)",
+      "Read(**/*.cer)",
+      "Read(**/*.der)",
+      "Read(**/*secret*)",
+      "Read(**/*secrets*)",
+      "Read(**/*credential*)",
+      "Read(**/*credentials*)",
+      "Read(**/*_rsa)",
+      "Read(**/*_ed25519)",
+      "Read(**/*_dsa)",
+      "Read(**/*_ecdsa)",
+      "Read(**/.netrc)",
+      "Read(**/.htpasswd)",
+      "Read(**/auth.json)",
+      "Read(**/keystore.*)",
+      "Read(**/*.keystore)",
+      "Read(**/*.jks)",
+      "Read(**/google-services.json)",
+      "Read(**/GoogleService-Info.plist)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
+  },
+  "effortLevel": "high",
+  "tui": "default"
+}
