@@ -24,18 +24,20 @@ else
   echo "Merged settings.json"
 fi
 
-# CLAUDE.md is copied from the repo; a drifted local copy is shown and backed up.
-src="$REPO/settings/dotclaude/CLAUDE.md"
-dest="$HOME/.claude/CLAUDE.md"
-if cmp -s "$src" "$dest"; then
-  echo "CLAUDE.md up to date"
-else
+# These are copied from the repo; a drifted local copy is shown and backed up.
+for name in CLAUDE.md statusline.sh; do
+  src="$REPO/settings/dotclaude/$name"
+  dest="$HOME/.claude/$name"
+  if cmp -s "$src" "$dest"; then
+    echo "$name up to date"
+    continue
+  fi
   if [ -f "$dest" ]; then
     bak="$dest.bak.$(date +%Y%m%d%H%M%S)"
-    echo "⚠ Local CLAUDE.md differs from the repo; backed up to $bak. Diff (local → repo):"
+    echo "⚠ Local $name differs from the repo; backed up to $bak. Diff (local → repo):"
     diff -u "$dest" "$src" || true
     cp "$dest" "$bak"
   fi
-  cp "$src" "$dest"
-  echo "Copied CLAUDE.md"
-fi
+  cp -p "$src" "$dest"
+  echo "Copied $name"
+done
