@@ -17,7 +17,7 @@ It runs two scripts in order. It only stops to ask when local and repo disagree;
 
 ### 1. `scripts/skills.sh`: third-party skills, with mine on top
 
-1. Runs `npx skills update -g -y`, which updates every skill installed with the [`skills` CLI](https://github.com/vercel-labs/skills) (e.g. mattpocock/skills) into `~/.agents/skills/`.
+1. Runs `npx skills update -g -y`, which updates every skill installed with the [`skills` CLI](https://github.com/vercel-labs/skills) (e.g. mattpocock/skills) into `~/.agents/skills/` when its author has changed it. New third-party skills are not added (see [Adding and removing](#adding-and-removing-third-party-skills)), and nothing is ever removed.
 2. For each folder in `skills/`, replaces `~/.agents/skills/<name>` with a symlink to it. If a third-party skill has the same name, mine wins. If none does, it's simply added.
 
 The chain Claude Code follows looks like this:
