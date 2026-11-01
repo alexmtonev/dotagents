@@ -3,7 +3,7 @@
 # Objects merge recursively (repo wins on conflicts); arrays are unioned,
 # so permissions Claude Code added locally survive. Keys are never removed.
 set -euo pipefail
-REPO="$(cd "$(dirname "$0")" && pwd)"
+REPO="$(cd "$(dirname "$0")/.." && pwd)"
 dest="$HOME/.claude/settings.json"
 [ -f "$dest" ] || echo '{}' > "$dest"
 

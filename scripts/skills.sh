@@ -3,7 +3,7 @@
 # upstream/<name> holds the last upstream version seen for each override,
 # so an upstream change is shown as a diff (and shows up in git status).
 set -euo pipefail
-REPO="$(cd "$(dirname "$0")" && pwd)"
+REPO="$(cd "$(dirname "$0")/.." && pwd)"
 AGENTS="$HOME/.agents/skills"
 
 npx -y skills@latest update -g -y
