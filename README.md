@@ -7,11 +7,13 @@ git clone git@github.com:alexmtonev/dotagents.git ~/Dev/Config/dotagents
 ~/Dev/Config/dotagents/update.sh
 ```
 
+Needs `node` (for `npx`) and `jq`.
+
 Run `./update.sh` again whenever you pull, edit something here, or want the latest third-party skills. When nothing needs a decision it runs straight through, and running it twice changes nothing.
 
 ## What `./update.sh` does
 
-It runs two scripts in order. It only stops to ask when local and repo disagree; pressing Enter picks the default shown in brackets. Without a terminal (e.g. piped), the defaults are used.
+It runs two scripts in order. It only stops to ask when local and repo disagree; pressing Enter picks the default shown in parentheses. Without a terminal (e.g. piped), the defaults are used.
 
 ### 1. `scripts/skills.sh`: third-party skills, with mine on top
 
@@ -45,6 +47,19 @@ Files live in `settings/dotclaude/` and go into `~/.claude/`:
 
 Settings for one machine only go in `~/.claude/settings.local.json`, which this repo never touches.
 
+## Adding and removing third-party skills
+
+`update.sh` only updates skills the CLI already has installed, so on a new machine, or for a new source, install them first:
+
+```sh
+npx skills add mattpocock/skills -g           # pick skills interactively
+npx skills add mattpocock/skills --skill pr -g  # or name them
+npx skills remove <name> -g
+npx skills ls -g                                # what's installed
+```
+
+Avoid `-y` on `add`: it installs for every agent the CLI knows, creating folders such as `~/.kiro`.
+
 ## `upstream/`
 
 For each skill I've overridden, `upstream/<name>` holds the last third-party version the script saw. It is committed.
@@ -64,3 +79,8 @@ skills/<name>/         my skills and overrides
 upstream/<name>/       last-seen third-party version of each override
 settings/dotclaude/    Claude Code files (other harnesses get their own folder)
 ```
+
+## Known gaps
+
+- `npx skills update` can't be limited to Claude Code, so it may create other agents' folders (e.g. `~/.kiro`). Delete them if unwanted.
+- Removing a folder from `skills/` leaves a dangling `~/.agents/skills/<name>` link; delete it by hand (and `npx skills add` the upstream skill again if it was an override).
