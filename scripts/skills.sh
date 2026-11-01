@@ -7,7 +7,7 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 AGENTS="$HOME/.agents/skills"
 . "$REPO/scripts/lib.sh"
 
-npx -y skills@latest update -g -y </dev/null
+npx -y skills@latest update -g -y
 
 for src in "$REPO"/skills/*/; do
   src="${src%/}"; name="$(basename "$src")"
